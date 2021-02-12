@@ -8,6 +8,10 @@ spec:
     canary:
       canaryService: rollouts-demo-canary
       stableService: rollouts-demo-stable
+      trafficRouting:
+        alb:
+          ingress: rollouts-demo-ingress
+          servicePort: 80
       steps:
       - setWeight: 10
       - pause: {}
@@ -31,3 +35,5 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
+
+            
