@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
 - rollout.yaml
 - rollouts-demo-stable.yaml
+- ingress.yaml
 - rollouts-demo-canary.yaml
 
