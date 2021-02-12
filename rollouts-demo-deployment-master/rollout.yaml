@@ -1,13 +1,21 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: rollouts-demo
-  labels:
-    app: rollouts-demo
 spec:
-  replicas: 5
-  revisionHistoryLimit: 3
+  replicas: 2
+  strategy:
+    canary:
+      canaryService: rollouts-demo-canary
+      stableService: rollouts-demo-stable
+      trafficRouting:
+        alb:
+          ingress: rollouts-demo-ingress
+          servicePort: 80
+      steps:
+      - setWeight: 10
+      - pause: {}
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: rollouts-demo
@@ -17,25 +25,13 @@ spec:
         app: rollouts-demo
     spec:
       containers:
-        - name: rollouts-demo
-          image: "argoproj/rollouts-demo:blue"
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-  strategy:
-#     blueGreen:
-#       activeService: rollouts-demo
-#       previewService: rollouts-demo-preview
-     canary: 
-       steps:
-       - setWeight: 20
-       - pause: {}
+      - name: rollouts-demo
+        image: argoproj/rollouts-demo:blue
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m
