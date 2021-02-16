@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: docker/getting-started:1.0.0
+        image: argoproj/rollout-demo:blue
         ports:
         - name: http
           containerPort: 8080
