@@ -8,7 +8,7 @@ spec:
     canary:
       trafficRouting:
         alb:
-          ingress: rollouts-demo-ingress
+          ingress: rollouts-demo-ingress3
           servicePort: 80
       canaryService: rollouts-demo-canary
       stableService: rollouts-demo-stable
