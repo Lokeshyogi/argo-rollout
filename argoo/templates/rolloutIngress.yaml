@@ -13,12 +13,12 @@ metadata:
             {
                 "Weight":0,
                 "ServiceName":"rollouts-demo-canary",
-                "ServicePort":"80"
+                "ServicePort":"8080"
             },
             {
                 "Weight":100,
                 "ServiceName":"rollouts-demo-stable",
-                "ServicePort":"80"
+                "ServicePort":"8080"
             }
           ]
         }
