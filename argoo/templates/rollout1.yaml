@@ -9,9 +9,8 @@ spec:
       canaryService: rollouts-demo-canary
       stableService: rollouts-demo-stable
       trafficRouting:
-        alb:
-          ingress: rollouts-demo-ingress
-          servicePort: 80
+        nginx:
+          stableIngress: rollouts-demo-stable
       steps:
       - setWeight: 5
       - pause: {}
