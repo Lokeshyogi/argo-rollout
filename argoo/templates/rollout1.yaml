@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollouts-demo1
+  name: rollouts-demo
 spec:
   replicas: 1
   strategy:
@@ -10,7 +10,7 @@ spec:
       stableService: rollouts-demo-stable
       trafficRouting:
         alb:
-          ingress: rollouts-ingress
+          ingress: rollouts-demo-ingress
           servicePort: 80
       steps:
       - setWeight: 5
@@ -18,14 +18,14 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rollouts-demo1
+      app: rollouts-demo
   template:
     metadata:
       labels:
-        app: rollouts-demo1
+        app: rollouts-demo
     spec:
       containers:
-      - name: rollouts-demo1
+      - name: rollouts-demo
         image: argoproj/rollouts-demo:blue
         ports:
         - name: http
